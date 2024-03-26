@@ -25,6 +25,7 @@ def handle_sock(_sock, addr):
 </html>
 
 '''
+        # 本身是字符串，无需json.dumps转字符串
         _sock.send(response_template.encode('utf-8'))
 
 # 不断接受客户端请求，并新开线程处理
