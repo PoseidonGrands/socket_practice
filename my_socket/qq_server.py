@@ -14,7 +14,7 @@ user_msgs = defaultdict(list)
 
 
 def sock_handle(_sock, _addr):
-    # 连接建立后持续接受消息
+    # 连接建立后持续接受消息（不是一次性接收消息后就断开连接，而是持续的通信，所以发送消息给client后不需要关闭sock
     while True:
         # 接收的是json数据,接收的数据格式:{action:xx ,user:xx}
         json_data = _sock.recv(1024)
