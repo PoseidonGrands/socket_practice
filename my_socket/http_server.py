@@ -17,6 +17,7 @@ def handle_sock(_sock, addr):
     while True:
         tmp_data = _sock.recv(1024)
 
+        # http响应
         response_template = '''HTTP/1.1 200 OK
 
 <html>
