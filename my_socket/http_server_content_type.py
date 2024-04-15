@@ -7,7 +7,7 @@ t = ThreadPoolExecutor(5)
 
 # 默认是tcp协议
 server = socket.socket()
-server.bind(('0.0.0.0', 8000))
+server.bind(('0.0.0.0', 8003))
 server.listen()
 
 
@@ -17,12 +17,16 @@ def handle_sock(_sock, addr):
     while True:
         tmp_data_json = _sock.recv(1024)
         tmp_data = tmp_data_json.decode('utf-8')
+        print(tmp_data)
         # 解析出请求方式和路径
         method = tmp_data.split(' ')[0]
         path = tmp_data.split(' ')[1]
         if method == 'GET':
             # http响应
             response_template = '''HTTP/1.1 200 OK
+Set-Cookie: name=sewellhe
+Set-Cookie: course_id=213
+Set-Cookie: session_id=12312312312
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +79,6 @@ def handle_sock(_sock, addr):
             # 本身是字符串，无需json.dumps转字符串
             _sock.send(response_template.encode('utf-8'))
             _sock.close()
-
 
 
 # 不断接受客户端请求，并新开线程处理
